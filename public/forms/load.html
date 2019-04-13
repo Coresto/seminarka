@@ -1,0 +1,38 @@
+<div data-jc="form__common.form__if:load;width:500;icon:user;submit:loadform/submit;reload:loadform/reload;title:Nahrať zo súboru" class="hidden">
+	<div data-jc-scope="loadform.form">
+		<div class="padding">
+			<div data-jc="textbox__path__required:true" class="m">Cesta</div>
+			<br />
+			<div data-jc="error__response"></div>
+		</div>
+	</div>
+	<div class="ui-form-buttons" data-jc="validation__loadform.form">
+		<button name="submit" disabled="disabled">SUBMIT</button>
+		<button name="cancel">Cancel</button>
+	</div>
+</div>
+
+<script>
+
+	PLUGIN('loadform', function(exports) {
+
+		exports.reload = function(com) {
+
+		};
+
+		exports.submit = function(com) {
+			// Reset form
+			var omg = GET('loadform.form');
+			RESET('loadform.form.*');
+			SETTER('loading', 'show');
+
+			AJAX('POST /api/path/', omg, function(response) {
+				SETTER('loading', 'hide', 500);
+				console.log(response);
+			});
+			EXEC('dashboard/refresh');
+			com.hide();
+		};
+	});
+
+</script>

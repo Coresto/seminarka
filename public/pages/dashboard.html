@@ -1,0 +1,35 @@
+<h1>Dashboard</h1>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div data-jc="datagrid__dashboard.grid__checkbox:false;">
+			<script type="text/plain">
+				[
+					{ name: 'Name', text: 'Meno', width: 400 },
+					{ name: 'Category', text: 'Kategória' },
+					{ name: 'Price', text: 'Cena' },
+					{ name: 'Location', text: 'Poloha' },
+					{ name: 'TimeOfCreation', text: 'Čas' }
+				]
+			</script>
+		</div>
+	</div>
+</div>
+<script>
+	PLUGIN('dashboard', function(exports) {
+		exports.reload = function() {
+		};
+
+		exports.refresh = function() {
+			AJAX('GET /api/items/', '?.grid');
+		};
+
+		exports.category = function() {
+			AJAX('GET /api/items/category/', '?.grid');
+		};
+
+		exports.location = function() {
+			AJAX('GET /api/items/location/', '?.grid');
+		};
+	});
+</script>
