@@ -2,6 +2,7 @@
 	<div data-jc-scope="location.form">
 		<div class="padding">
 			<div class="m" data-jc="textbox__location__required:true">Poloha</div>
+			<div class="m" data-jc="textbox__path">Cesta</div>
 			<br />
 			<div data-jc="error__response"></div>
 		</div>
@@ -28,7 +29,7 @@
 
 			AJAX('GET /api/items/location/', omg, function(response) {
 				SETTER('loading', 'hide', 500);
-				SET('?.grid', response);
+				SET('dashboard.grid', response);
 			});
 			com.hide();
 		};

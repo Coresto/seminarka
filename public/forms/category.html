@@ -1,7 +1,8 @@
 <div data-jc="form__common.form__if:category;width:500;icon:filter;submit:category/submit;reload:category/reload;title:Zadaj kategóriu;cancel:dashboard/refresh;enter:true" class="hidden">
 	<div data-jc-scope="category.form">
 		<div class="padding">
-			<div data-jc="textbox__category__required:true" class="m">Kategória</div>
+			<div class="m" data-jc="textbox__category__required:true">Kategória</div>
+			<div class="m" data-jc="textbox__path">Cesta</div>
 			<br />
 			<div data-jc="error__response"></div>
 		</div>
@@ -27,7 +28,7 @@
 			SETTER('loading', 'show');
 			AJAX('GET /api/items/category/', omg, function(response) {
 				SETTER('loading', 'hide', 500);
-				SET('?.grid', response);
+				SET('dashboard.grid', response);
 			});
 			com.hide();
 		};

@@ -15,7 +15,6 @@ NEWOPERATION('ItemList', function($) {
 });
 
 NEWOPERATION('CategoryList', function($) {
-    console.log($.query);
     RESTBuilder.make(function(builder) {
        builder.url('http://localhost:50026/RealityService.asmx/CategoryList');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
@@ -39,6 +38,7 @@ NEWOPERATION('LocationList', function($) {
        builder.post();
        builder.exec(function(err, response) {
          console.log(response);
+          //!err && $.callback(response);
            if (!err) {
                $.callback({ items: response });
            }
@@ -72,6 +72,7 @@ NEWOPERATION('UpdateItem', function($) {
 });
 
 NEWOPERATION('AddItem', function($) {
+    console.log($.value);
     RESTBuilder.make(function(builder) {
        builder.url('http://localhost:50026/RealityService.asmx/AddItem');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
@@ -90,7 +91,10 @@ NEWOPERATION('DateList', function($) {
        builder.urlencoded($.query);
        builder.post();
        builder.exec(function(err, response) {
-           !err && $.callback(response);
+         console.log(response);
+           if (!err) {
+               $.callback({ items: response });
+           }
        });
     });
 });
@@ -102,7 +106,10 @@ NEWOPERATION('FilterList', function($) {
        builder.urlencoded($.query);
        builder.post();
        builder.exec(function(err, response) {
-           !err && $.callback(response);
+         console.log(response);
+           if (!err) {
+               $.callback({ items: response });
+           }
        });
     });
 });
