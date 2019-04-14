@@ -2,14 +2,14 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<div data-jc="datagrid__dashboard.grid__checkbox:false;">
+		<div data-jc="datagrid__dashboard.grid__checkbox:false;click:dashboard/select;highlight:true;autoselect:false">
 			<script type="text/plain">
 				[
-					{ name: 'Name', text: 'Meno', width: 400 },
+					{ name: 'Name', text: 'Meno', width: 300 },
 					{ name: 'Category', text: 'Kategória' },
 					{ name: 'Price', text: 'Cena' },
 					{ name: 'Location', text: 'Poloha' },
-					{ name: 'TimeOfCreation', text: 'Čas' },
+					{ name: 'TimeOfCreation', text: 'Čas', format: '[ts]' },
 					{ name: 'Rooms', text: 'Počet izieb' },
 					{ name: 'Age', text: 'Vek' },
 					{ name: 'Size', text: 'Veľkosť' },
@@ -19,21 +19,42 @@
 		</div>
 	</div>
 </div>
+
 <script>
 	PLUGIN('dashboard', function(exports) {
 		exports.reload = function() {
 		};
 
-		exports.refresh = function() {
-			AJAX('GET /api/items/', '?.grid');
+		exports.newItem = function() {
+			NULL('item.form');
+			SET('common.part', 'item');
 		};
 
-		exports.category = function() {
-			AJAX('GET /api/items/category/', '?.grid');
+		exports.refresh = function() {
+			REDIRECT('/');
+			SETTER('loading', 'show');
+			AJAX('GET /api/items/', function(response) {
+				SETTER('loading', 'hide', 500);
+				SET('?.grid', response);
+			});
 		};
 
 		exports.location = function() {
-			AJAX('GET /api/items/location/', '?.grid');
+			SETTER('loading', 'show');
+			AJAX('GET /api/items/location/', function(response) {
+				SETTER('loading', 'hide', 500);
+				SET('?.grid', response);
+			});
+		};
+
+		exports.select = function(row, grid) {
+			if (!row) {
+				NULL('item.form');
+				NULL('common.part');
+				return;
+			}
+			SET('item.form', row);
+			SET('common.part', 'item');
 		};
 	});
 </script>

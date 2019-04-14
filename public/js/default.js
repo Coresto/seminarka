@@ -9,8 +9,6 @@ ON('ready', function() {
 		}, 100);
 	});
 	setTimeout(EXEC2('#resize'), 50);
-	COMPONENT_CONFIG('part', 'cleaner:2');
-	COMPONENT_CONFIG('datagrid', 'apply:Potvrdiť;reorder:false');
 });
 
 function mainmenu(el) {

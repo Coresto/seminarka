@@ -19,6 +19,8 @@
 	@{import('meta', 'head', 'default.css', 'default.js', 'favicon.ico')}
 </head>
 <body data-jc="exec" class="invisible" data-jc-class="invisible">
+	<div data-jc="calendar__null__firstday:1;days:NE,PO,UT,ST,ŠT,PI,SO;months:Január,Február,Marec,Apríl,Máj,Jún,Júl,August,September,Október,November,December;close:Zatvoriť;today:Dnes"></div>
+	<div data-jc="loading" class="hidden"></div>
 	<header>
 		<div class="tools">
 		</div>
@@ -32,11 +34,14 @@
 						<div class="caption">Filtrovanie</div>
 						<nav class="links m">
 							<a href="/" class="R exec" data-if="all" data-exec="dashboard/refresh"><i class="fas fa-filter"></i>Všetky</a>
-							<a href="/category" class="R exec" data-if="category" data-exec="dashboard/category"><i class="fas fa-filter"></i>Kategórie</a>
-							<a href="/location" class="R exec" data-if="location" data-exec="dashboard/location"><i class="fas fa-filter"></i>Lokalita</a>
+							<a href="/category" class="R" data-if="category"><i class="fas fa-filter"></i>Kategórie</a>
+							<a href="/location" class="R" data-if="location"><i class="fas fa-filter"></i>Lokalita</a>
+							<a href="/date" class="R" data-if="date"><i class="fas fa-filter"></i>Dátum</a>
+							<a href="/filter" class="R" data-if="filter"><i class="fas fa-filter"></i>Filter</a>
 						</nav>
 						<div class="caption"></div>
-						<button type="button" name="button" class="button exec" data-exec="main/reload"><i class="fas fa-upload"></i>Nahrať zo súboru</button>
+						<button type="button" name="button" class="button exec m" data-exec="dashboard/newItem"><i class="fas fa-upload"></i>Nová položka</button>
+						<button type="button" name="button" class="button exec m" data-exec="main/reload"><i class="fas fa-upload"></i>Nahrať zo súboru</button>
 					</div>
 				</div>
 			</div>
@@ -49,9 +54,19 @@
 	</div>
 
 	<div data-jc="importer__common.form__if:load;url:/forms/load.html"></div>
+	<div data-jc="importer__common.form__if:date;url:/forms/date.html"></div>
+	<div data-jc="importer__common.form__if:location;url:/forms/location.html"></div>
+	<div data-jc="importer__common.form__if:category;url:/forms/category.html"></div>
+	<div data-jc="importer__common.form__if:filter;url:/forms/filter.html"></div>
+	<div data-jc="importer__common.part__if:item;url:/parts/item.html"></div>
+
 	@{json(user, 'userdata')}
 
 	<script>
+		ENV('date', 'dd.MM.yyyy');
+		ENV('ts', 'dd.MM.yyyy HH:mm:ss');
+		COMPONENT_CONFIG('part', 'cleaner:2');
+		COMPONENT_CONFIG('datagrid', 'buttonapply:Použiť;reorder:false');
 
 		var common = {};
 		common.user = PARSE('#userdata');
@@ -68,6 +83,24 @@
 		ROUTE('/location', function() {
 			SET('common.page', 'dashboard');
 			SET('common.filter', 'location');
+		});
+		ROUTE('/date', function() {
+			SET('common.page', 'dashboard');
+			SET('common.filter', 'date');
+		});
+		ROUTE('/filter', function() {
+			SET('common.page', 'dashboard');
+			SET('common.filter', 'filter');
+		});
+
+		WATCH('common.filter', function(path, value, type) {
+		    if (type == 1) {
+				if (value == 'all') {
+					
+				} else {
+					SET('common.form', value);
+				}
+			}
 		});
 
 		PLUGIN('main', function(exports) {

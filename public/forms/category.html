@@ -1,0 +1,36 @@
+<div data-jc="form__common.form__if:category;width:500;icon:filter;submit:category/submit;reload:category/reload;title:Zadaj kategóriu;cancel:dashboard/refresh;enter:true" class="hidden">
+	<div data-jc-scope="category.form">
+		<div class="padding">
+			<div data-jc="textbox__Category__required:true" class="m">Kategória</div>
+			<br />
+			<div data-jc="error__response"></div>
+		</div>
+	</div>
+	<div class="ui-form-buttons" data-jc="validation__category.form">
+		<button name="submit" disabled="disabled">SUBMIT</button>
+		<button name="cancel">Cancel</button>
+	</div>
+</div>
+<script>
+
+	PLUGIN('category', function(exports) {
+
+		exports.reload = function(com) {
+			NULL('category.form');
+		};
+
+		exports.submit = function(com) {
+			// Reset form
+			var omg = GET('category.form');
+			RESET('category.form.*');
+
+			SETTER('loading', 'show');
+			AJAX('GET /api/items/category/', omg, function(response) {
+				SETTER('loading', 'hide', 500);
+				SET('?.grid', response);
+			});
+			com.hide();
+		};
+	});
+
+</script>

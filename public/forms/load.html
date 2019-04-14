@@ -1,4 +1,4 @@
-<div data-jc="form__common.form__if:load;width:500;icon:user;submit:loadform/submit;reload:loadform/reload;title:Nahrať zo súboru" class="hidden">
+<div data-jc="form__common.form__if:load;width:500;icon:folder-open;submit:loadform/submit;reload:loadform/reload;title:Nahrať zo súboru;cancel:dashboard/refresh;enter:true" class="hidden">
 	<div data-jc-scope="loadform.form">
 		<div class="padding">
 			<div data-jc="textbox__path__required:true" class="m">Cesta</div>
@@ -17,16 +17,16 @@
 	PLUGIN('loadform', function(exports) {
 
 		exports.reload = function(com) {
-
+			NULL('loadform.form');
 		};
 
 		exports.submit = function(com) {
 			// Reset form
-			var omg = GET('loadform.form');
+			var form = GET('loadform.form');
 			RESET('loadform.form.*');
 			SETTER('loading', 'show');
 
-			AJAX('POST /api/path/', omg, function(response) {
+			AJAX('POST /api/path/', form, function(response) {
 				SETTER('loading', 'hide', 500);
 				console.log(response);
 			});

@@ -1,0 +1,47 @@
+<div data-jc="form__common.form__if:filter;width:500;icon:filter;submit:filter/submit;reload:filter/reload;title:Vyplnte;cancel:dashboard/refresh;enter:true" class="hidden">
+	<div data-jc-scope="filter.form">
+		<div class="padding">
+			<div class="m" data-jc="textbox__category__required:true;autofocus:true" class="m">Kategória</div>
+			<div class="m" data-jc="textbox__city__required:true">Mesto</div>
+			<div class="m" data-jc="textbox__room__type:number;required:true">Počet izieb</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="m" data-jc="textbox__minprice__type:number;required:true">Cena</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="m" data-jc="textbox__maxprice__type:number;required:true">Počet izieb</div>
+				</div>
+			</div>
+			<div class="m" data-jc="textbox__path">Cesta</div>
+			<br />
+			<div data-jc="error__response"></div>
+		</div>
+	</div>
+	<div class="ui-form-buttons" data-jc="validation__filter.form">
+		<button name="submit" disabled="disabled">SUBMIT</button>
+		<button name="cancel">Cancel</button>
+	</div>
+</div>
+<script>
+
+	PLUGIN('filter', function(exports) {
+
+		exports.reload = function(com) {
+			NULL('filter.form');
+		};
+
+		exports.submit = function(com) {
+			// Reset form
+			var omg = GET('filter.form');
+			RESET('filter.form.*');
+			SETTER('loading', 'show');
+
+			AJAX('GET /api/items/filter/', omg, function(response) {
+				SETTER('loading', 'hide', 500);
+				SET('?.grid', response);
+			});
+			com.hide();
+		};
+	});
+
+</script>

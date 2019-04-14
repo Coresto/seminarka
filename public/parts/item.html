@@ -1,0 +1,55 @@
+<div data-jc="panel__common.part__if:item;width:500;icon:user;submit:item/submit;reload:item/reload" class="hidden">
+	<div data-jc-scope="item.form">
+		<div class="padding">
+			<div class="m" data-jc="textbox__Name__autofocus:true;required:true">Meno</div>
+			<div class="m" data-jc="textbox__Category__required:true">Kategória</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="m" data-jc="textbox__Price__type:number;required:true">Cena</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="m" data-jc="textbox__Rooms__type:number;required:true">Počet izieb</div>
+				</div>
+			</div>
+			<div class="m" data-jc="textbox__Location__required:true">Poloha</div>
+			<div class="m" data-jc="textbox__TimeOfCreation__type:date;disabled:true;format:[ts];required:true">Čas</div>
+			<div class="m" data-jc="textbox__Age__type:number;required:true">Vek</div>
+			<div class="m" data-jc="textbox__Size__type:number;required:true">Veľkosť</div>
+			<div class="m" data-jc="textbox__Isolation__required:true">Zateplenie</div>
+		</div>
+	</div>
+	<div class="ui-form-buttons" data-jc="validation__filter.form">
+		<button name="submit" disabled="disabled">SUBMIT</button>
+		<button name="cancel">Cancel</button>
+	</div>
+</div>
+<script>
+
+	PLUGIN('item', function(exports) {
+
+		exports.reload = function(comp) {
+			var id = GET('item.form.RealId');
+			comp.reconfigure('title:' + (id != undefined ? 'Upraviť položku' : 'Pridať novú položku'));
+		};
+
+		exports.submit = function(comp) {
+			var form = GET('item.form');
+			if (form.RealId == undefined) {
+				SETTER('loading', 'show');
+				AJAX('POST /api/items/', form, function(res, err) {
+					SETTER('loading', 'hide', 500);
+					NULL('item.form');
+					comp.hide();
+				});
+			} else {
+				SETTER('loading', 'show');
+				AJAX('PUT /api/items/{0}/'.format(form.RealId), form, function(res, err) {
+					SETTER('loading', 'hide', 500);
+					NULL('item.form');
+					comp.hide();
+				});
+			}
+		};
+	});
+
+</script>

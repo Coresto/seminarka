@@ -1,0 +1,38 @@
+<div data-jc="form__common.form__if:date;width:500;icon:filter;submit:date/submit;reload:date/reload;title:Zadaj dátum;cancel:dashboard/refresh;enter:true" class="hidden">
+	<div data-jc-scope="date.form">
+		<div class="padding">
+			<div data-jc="textbox__low__required:true" class="m">Od</div>
+			<div data-jc="textbox__high__required:true" class="m">Do</div>
+			<br />
+			<div data-jc="error__response"></div>
+		</div>
+	</div>
+	<div class="ui-form-buttons" data-jc="validation__date.form">
+		<button name="submit" disabled="disabled">SUBMIT</button>
+		<button name="cancel">Cancel</button>
+	</div>
+</div>
+
+<script>
+
+	PLUGIN('date', function(exports) {
+
+		exports.reload = function(com) {
+			NULL('date.form');
+		};
+
+		exports.submit = function(com) {
+			// Reset form
+			var omg = GET('date.form');
+			RESET('date.form.*');
+			SETTER('loading', 'show');
+
+			AJAX('GET /api/items/date/', omg, function(response) {
+				SETTER('loading', 'hide', 500);
+				SET('?.grid', response);
+			});
+			com.hide();
+		};
+	});
+
+</script>
