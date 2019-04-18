@@ -1,6 +1,6 @@
 NEWOPERATION('ItemList', function($) {
     RESTBuilder.make(function(builder) {
-       builder.url('http://localhost:50026/RealityService.asmx/ItemList');
+       builder.url('http://localhost:8080/RealityService.asmx/ItemList');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.post();
        builder.exec(function(err, response) {
@@ -16,7 +16,7 @@ NEWOPERATION('ItemList', function($) {
 
 NEWOPERATION('CategoryList', function($) {
     RESTBuilder.make(function(builder) {
-       builder.url('http://localhost:50026/RealityService.asmx/CategoryList');
+       builder.url('http://localhost:8080/RealityService.asmx/CategoryList');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.urlencoded($.query);
        builder.post();
@@ -32,7 +32,7 @@ NEWOPERATION('CategoryList', function($) {
 
 NEWOPERATION('LocationList', function($) {
     RESTBuilder.make(function(builder) {
-       builder.url('http://localhost:50026/RealityService.asmx/LocationList');
+       builder.url('http://localhost:8080/RealityService.asmx/LocationList');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.urlencoded($.query);
        builder.post();
@@ -49,7 +49,7 @@ NEWOPERATION('LocationList', function($) {
 
 NEWOPERATION('SendPath', function($) {
     RESTBuilder.make(function(builder) {
-       builder.url('http://localhost:50026/RealityService.asmx/FillWithFile');
+       builder.url('http://localhost:8080/RealityService.asmx/FillWithFile');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.urlencoded($.value);
        builder.post();
@@ -61,7 +61,7 @@ NEWOPERATION('SendPath', function($) {
 
 NEWOPERATION('UpdateItem', function($) {
     RESTBuilder.make(function(builder) {
-       builder.url('http://localhost:50026/RealityService.asmx/EditItem');
+       builder.url('http://localhost:8080/RealityService.asmx/EditItem');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.urlencoded($.value);
        builder.post();
@@ -74,7 +74,7 @@ NEWOPERATION('UpdateItem', function($) {
 NEWOPERATION('AddItem', function($) {
     console.log($.value);
     RESTBuilder.make(function(builder) {
-       builder.url('http://localhost:50026/RealityService.asmx/AddItem');
+       builder.url('http://localhost:8080/RealityService.asmx/AddItem');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.urlencoded($.value);
        builder.post();
@@ -86,7 +86,7 @@ NEWOPERATION('AddItem', function($) {
 
 NEWOPERATION('DateList', function($) {
     RESTBuilder.make(function(builder) {
-       builder.url('http://localhost:50026/RealityService.asmx/GetDateRange');
+       builder.url('http://localhost:8080/RealityService.asmx/GetDateRange');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.urlencoded($.query);
        builder.post();
@@ -101,7 +101,7 @@ NEWOPERATION('DateList', function($) {
 
 NEWOPERATION('FilterList', function($) {
     RESTBuilder.make(function(builder) {
-       builder.url('http://localhost:50026/RealityService.asmx/GetFiltered');
+       builder.url('http://localhost:8080/RealityService.asmx/GetFiltered');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.urlencoded($.query);
        builder.post();
