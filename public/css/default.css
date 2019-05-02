@@ -28,7 +28,7 @@ html,body { margin: 0; padding: 0; }
 
 .padding { padding: 20px; }
 .hidden { display: none; }
-.logo { display: block; margin: 17px 20px 0; float: left; width: 90px; }
+.logo { display: block; margin: 10px 20px 0; float: left; width: 260px; height: 45px; }
 
 header { height: 60px; border-bottom: 1px solid #E0E0E0; }
 header > button { display: none; position: absolute; right: 0; top: 0; width: 60px; height: 59px; border: 0; color: white; background-color: #e93223; font-size: 24px; }
@@ -73,7 +73,7 @@ h2 i { margin-right: 10px; color: $color; }
 
 header .user { float: right; margin: 0; padding: 8px 20px 0; height: 60px; border-left: 1px solid #E0E0E0; }
 header .user .avatar { border-radius: 100px; width: 40px; height: 40px; background-color: $color; text-align: center; font-family: $font; color: white; font-size: 16px; padding: 9px 0 0 0; font-weight: bold; }
-header .tools { float: right; font-size: 18px; padding: 14px 20px 0 0; }
+header .tools { float: left; font-size: 18px; }
 header .tools a { color: gray; position: relative; display: inline-block; margin-left: 20px; transition: color 0.5s; font-size: 12px; line-height: 14px; }
 header .tools a i { margin-right: 5px; font-size: 18px; vertical-align: middle; }
 header .tools a span { vertical-align: middle; }
