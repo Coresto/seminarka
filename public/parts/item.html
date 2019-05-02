@@ -1,4 +1,4 @@
-<div data-jc="panel__common.part__if:item;width:500;icon:user;submit:item/submit;reload:item/reload" class="hidden">
+<div data-jc="panel__common.part__if:item;width:500;icon:user;submit:item/submit;reload:item/reload;title:Pridať novú položku" class="hidden">
 	<div data-jc-scope="item.form">
 		<div class="padding">
 			<div class="m" data-jc="textbox__name__autofocus:true;required:true">Meno</div>
@@ -28,8 +28,6 @@
 	PLUGIN('item', function(exports) {
 
 		exports.reload = function(comp) {
-			var id = GET('item.form.RealId');
-			comp.reconfigure('title:' + (id != undefined ? 'Upraviť položku' : 'Pridať novú položku'));
 		};
 
 		exports.submit = function(comp) { //comp je odkaz na komponentu pamel
@@ -38,15 +36,15 @@
 				SETTER('loading', 'show'); //zavola sa metoda show ktora zobrazi komponet loading kym sa nevrato odpoved
 				AJAX('POST /api/items/', form, function(res, err) {
 					SETTER('loading', 'hide', 500); //tu sa skryje po odpovedi, 500ms pocka
+					if (err) return;
 					NULL('item.form'); //form sa vznuluje
-					comp.hide(); //form sa skryje
 				});
 			} else {
 				SETTER('loading', 'show');
 				AJAX('PUT /api/items/{0}/'.format(form.RealId), form, function(res, err) {
 					SETTER('loading', 'hide', 500);
+					if (err) return;
 					NULL('item.form');
-					comp.hide();
 				});
 			}
 		};

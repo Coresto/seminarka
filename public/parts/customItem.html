@@ -1,0 +1,46 @@
+<div data-jc="panel__common.part__if:customItem;width:500;icon:user;submit:item/submit;reload:item/reload;title:Upraviť položku" class="hidden">
+	<div data-jc-scope="customItem.form">
+		<div class="padding">
+			<div class="m" data-jc="textbox__Name__autofocus:true;required:true">Meno</div>
+			<div class="m" data-jc="textbox__Category__required:true">Kategória</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="m" data-jc="textbox__Price__type:number;required:true">Cena</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="m" data-jc="textbox__Rooms__type:number;required:true">Počet izieb</div>
+				</div>
+			</div>
+			<div class="m" data-jc="textbox__Location__required:true">Poloha</div>
+			<div class="m" data-jc="textbox__TimeOfCreation__type:date;disabled:true;format:[ts]">Čas</div>
+			<div class="m" data-jc="textbox__Age__type:number;required:true">Vek</div>
+			<div class="m" data-jc="textbox__Size__type:number;required:true">Veľkosť</div>
+			<div class="m" data-jc="textbox__Iso__required:true">Zateplenie</div>
+		</div>
+	</div>
+	<div class="ui-form-buttons" data-jc="validation__customItem.form">
+		<button name="submit" disabled="disabled" class="exec" data-exec="item/submit">SUBMIT</button>
+		<button name="cancel">Cancel</button>
+	</div>
+</div>
+<script>
+
+	PLUGIN('customItem', function(exports) {
+
+		exports.reload = function(comp) {
+		};
+
+		exports.submit = function(comp) { //comp je odkaz na komponentu pamel
+			var form = GET('customItem.form'); //form je premenna v scope, docasna, item je objekt
+
+			SETTER('loading', 'show');
+			AJAX('PUT /api/items/{0}/'.format(form.RealId), form, function(res, err) {
+				SETTER('loading', 'hide', 500);
+				if (err) return;
+				NULL('customItem.form');
+			});
+
+		};
+	});
+
+</script>

@@ -23,6 +23,7 @@
 	<div data-jc="loading" class="hidden"></div>
 	<header>
 		<div class="tools">
+			<img src="@{'logo.png'}" alt="@{'%name'}" border="0" class="img-responsive" />
 		</div>
 	</header>
 
@@ -59,6 +60,7 @@
 	<div data-jc="importer__common.form__if:category;url:/forms/category.html"></div>
 	<div data-jc="importer__common.form__if:filter;url:/forms/filter.html"></div>
 	<div data-jc="importer__common.part__if:item;url:/parts/item.html"></div>
+	<div data-jc="importer__common.part__if:customItem;url:/parts/customItem.html"></div>
 
 	@{json(user, 'userdata')}
 
