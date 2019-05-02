@@ -32,15 +32,14 @@
 			comp.reconfigure('title:' + (id != undefined ? 'Upraviť položku' : 'Pridať novú položku'));
 		};
 
-		exports.submit = function(comp) {
-			console.log("PICI");
-			var form = GET('item.form');
-			if (form.RealId == undefined) {
-				SETTER('loading', 'show');
+		exports.submit = function(comp) { //comp je odkaz na komponentu pamel
+			var form = GET('item.form'); //form je premenna v scope, docasna, item je objekt
+			if (form.RealId == undefined) { //podmienka podla ktorej ide post alebo put
+				SETTER('loading', 'show'); //zavola sa metoda show ktora zobrazi komponet loading kym sa nevrato odpoved
 				AJAX('POST /api/items/', form, function(res, err) {
-					SETTER('loading', 'hide', 500);
-					NULL('item.form');
-					comp.hide();
+					SETTER('loading', 'hide', 500); //tu sa skryje po odpovedi, 500ms pocka
+					NULL('item.form'); //form sa vznuluje
+					comp.hide(); //form sa skryje
 				});
 			} else {
 				SETTER('loading', 'show');
