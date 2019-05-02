@@ -63,6 +63,8 @@ NEWOPERATION('UpdateItem', function($) {
     RESTBuilder.make(function(builder) {
        builder.url('http://localhost:8080/RealityService.asmx/EditItem');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
+	   console.log($.param);
+	   $.value.RealId = $.param.id;
        builder.urlencoded($.value);
        builder.post();
        builder.exec(function(err, response) {
@@ -72,7 +74,6 @@ NEWOPERATION('UpdateItem', function($) {
 });
 
 NEWOPERATION('AddItem', function($) {
-    console.log($.value);
     RESTBuilder.make(function(builder) {
        builder.url('http://localhost:8080/RealityService.asmx/AddItem');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');

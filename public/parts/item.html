@@ -32,21 +32,12 @@
 
 		exports.submit = function(comp) { //comp je odkaz na komponentu pamel
 			var form = GET('item.form'); //form je premenna v scope, docasna, item je objekt
-			if (form.RealId == undefined) { //podmienka podla ktorej ide post alebo put
-				SETTER('loading', 'show'); //zavola sa metoda show ktora zobrazi komponet loading kym sa nevrato odpoved
-				AJAX('POST /api/items/', form, function(res, err) {
-					SETTER('loading', 'hide', 500); //tu sa skryje po odpovedi, 500ms pocka
-					if (err) return;
-					NULL('item.form'); //form sa vznuluje
-				});
-			} else {
-				SETTER('loading', 'show');
-				AJAX('PUT /api/items/{0}/'.format(form.RealId), form, function(res, err) {
-					SETTER('loading', 'hide', 500);
-					if (err) return;
-					NULL('item.form');
-				});
-			}
+			SETTER('loading', 'show'); //zavola sa metoda show ktora zobrazi komponet loading kym sa nevrato odpoved
+			AJAX('POST /api/items/', form, function(res, err) {
+				SETTER('loading', 'hide', 500); //tu sa skryje po odpovedi, 500ms pocka
+				if (err) return;
+				NULL('item.form'); //form sa vznuluje
+			});
 		};
 	});
 

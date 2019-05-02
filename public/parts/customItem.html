@@ -1,25 +1,26 @@
-<div data-jc="panel__common.part__if:customItem;width:500;icon:user;submit:item/submit;reload:item/reload;title:Upraviť položku" class="hidden">
+<div data-jc="panel__common.part__if:customItem;width:500;icon:user;submit:customItem/submit;reload:customItem/reload;title:Upraviť položku" class="hidden">
 	<div data-jc-scope="customItem.form">
 		<div class="padding">
-			<div class="m" data-jc="textbox__Name__autofocus:true;required:true">Meno</div>
-			<div class="m" data-jc="textbox__Category__required:true">Kategória</div>
+			<div class="m" data-jc="textbox__RealId__disabled:true;">Meno</div>
+			<div class="m" data-jc="textbox__name__autofocus:true;required:true">Meno</div>
+			<div class="m" data-jc="textbox__category__required:true">Kategória</div>
 			<div class="row">
 				<div class="col-sm-6">
-					<div class="m" data-jc="textbox__Price__type:number;required:true">Cena</div>
+					<div class="m" data-jc="textbox__price__type:number;required:true">Cena</div>
 				</div>
 				<div class="col-sm-6">
-					<div class="m" data-jc="textbox__Rooms__type:number;required:true">Počet izieb</div>
+					<div class="m" data-jc="textbox__rooms__type:number;required:true">Počet izieb</div>
 				</div>
 			</div>
-			<div class="m" data-jc="textbox__Location__required:true">Poloha</div>
+			<div class="m" data-jc="textbox__location__required:true">Poloha</div>
 			<div class="m" data-jc="textbox__TimeOfCreation__type:date;disabled:true;format:[ts]">Čas</div>
-			<div class="m" data-jc="textbox__Age__type:number;required:true">Vek</div>
-			<div class="m" data-jc="textbox__Size__type:number;required:true">Veľkosť</div>
-			<div class="m" data-jc="textbox__Iso__required:true">Zateplenie</div>
+			<div class="m" data-jc="textbox__age__type:number;required:true">Vek</div>
+			<div class="m" data-jc="textbox__size__type:number;required:true">Veľkosť</div>
+			<div class="m" data-jc="textbox__iso__required:true">Zateplenie</div>
 		</div>
 	</div>
 	<div class="ui-form-buttons" data-jc="validation__customItem.form">
-		<button name="submit" disabled="disabled" class="exec" data-exec="item/submit">SUBMIT</button>
+		<button name="submit" disabled="disabled" class="exec" data-exec="customItem/submit">SUBMIT</button>
 		<button name="cancel">Cancel</button>
 	</div>
 </div>
