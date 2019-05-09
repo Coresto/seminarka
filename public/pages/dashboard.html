@@ -55,7 +55,7 @@
 				return;
 			}
 			console.log(row);
-			SET('item.form', row);
+			SET('customItem.form', { readlId: row.RealId });
 			SET('common.part', 'customItem');
 		};
 	});

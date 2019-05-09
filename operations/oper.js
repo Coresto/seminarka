@@ -4,7 +4,6 @@ NEWOPERATION('ItemList', function($) {
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
        builder.post();
        builder.exec(function(err, response) {
-         console.log(response);
            if (!err) {
                $.callback({ items: response });
            }
@@ -21,7 +20,6 @@ NEWOPERATION('CategoryList', function($) {
        builder.urlencoded($.query);
        builder.post();
        builder.exec(function(err, response) {
-         console.log(response);
            if (!err) {
                $.callback({ items: response });
            }
@@ -37,8 +35,6 @@ NEWOPERATION('LocationList', function($) {
        builder.urlencoded($.query);
        builder.post();
        builder.exec(function(err, response) {
-         console.log(response);
-          //!err && $.callback(response);
            if (!err) {
                $.callback({ items: response });
            }
@@ -63,8 +59,6 @@ NEWOPERATION('UpdateItem', function($) {
     RESTBuilder.make(function(builder) {
        builder.url('http://localhost:8080/RealityService.asmx/EditItem');
        builder.header('Content-Type', 'application/x-www-form-urlencoded');
-	   console.log($.param);
-	   $.value.RealId = $.param.id;
        builder.urlencoded($.value);
        builder.post();
        builder.exec(function(err, response) {

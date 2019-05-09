@@ -4,7 +4,7 @@ exports.install = function() {
     ROUTE('GET     /api/items/location/                     * --> @LocationList');
     ROUTE('GET     /api/items/date/                     	* --> @DateList');
     ROUTE('GET     /api/items/filter/                     	* --> @FilterList');
-    ROUTE('PUT     /api/items/{id}/                         * --> @UpdateItem');
+    ROUTE('POST     /api/items/                         * --> @UpdateItem');
     ROUTE('POST    /api/items/                              * --> @AddItem');
     ROUTE('POST    /api/path/                               * --> @SendPath');
 
